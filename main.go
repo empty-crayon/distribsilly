@@ -45,8 +45,12 @@ func main() {
 	// what is the shard count and what is the shard idx
 	var shardCount int = len(c.Shards)
 	var shardIdx = -1
+	var addrs = make(map[int]string)
 
 	for _, s := range c.Shards {
+		// populate the address map for the shards
+		addrs[s.Idx] = s.Address
+
 		if s.Name == *shard {
 			shardIdx = s.Idx
 		}
@@ -65,7 +69,7 @@ func main() {
 
 	defer close()
 
-	srv := web.NewServer(db, shardIdx, shardCount)
+	srv := web.NewServer(db, shardIdx, shardCount, addrs)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/get", srv.GetHandler)
