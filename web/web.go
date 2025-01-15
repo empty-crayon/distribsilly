@@ -10,13 +10,17 @@ import (
 
 // Server implements HTTP method handlers used to interact with database
 type Server struct {
-	db *db.Database
+	db         *db.Database
+	shardIdx   int
+	shardCount int
 }
 
 // NewServer creates a new instance http handlers to be used for get and set
-func NewServer(db *db.Database) *Server {
+func NewServer(db *db.Database, shardIdx, shardCount int) *Server {
 	return &Server{
-		db: db,
+		db:         db,
+		shardIdx:   shardIdx,
+		shardCount: shardCount,
 	}
 }
 

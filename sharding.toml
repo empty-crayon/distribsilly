@@ -1,0 +1,11 @@
+[[shards]]
+name = "shard1"
+idx = 1
+
+[[shards]]
+name = "shard0"
+idx = 0
+
+[[shards]]
+name = "shard2"
+idx = 2 
