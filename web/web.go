@@ -2,7 +2,6 @@ package web
 
 import (
 	"fmt"
-	"hash/fnv"
 	"io"
 	"log"
 	"net/http"
@@ -75,11 +74,4 @@ func (s *Server) SetHandler(w http.ResponseWriter, r *http.Request) {
 	err := s.db.SetKey(key, []byte(value))
 
 	fmt.Fprintf(w, "Shard: %d, Current Shard: %d, Error = %v", shard, s.shardIdx, err)
-}
-
-func (s *Server) getShard(key string) int {
-	hash := fnv.New64()
-	hash.Write([]byte(key))
-	shardId := int(hash.Sum64() % uint64(s.shardCount))
-	return shardId
 }

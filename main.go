@@ -41,6 +41,10 @@ func main() {
 	if _, err := toml.DecodeFile(*configFile, &c); err != nil {
 		log.Fatalf("Error decoding toml file, toml.decodefile(%q): %v", *configFile, err)
 	}
+	
+
+	shards, err := config.ParseShards(c.Shards, *shard)
+
 
 	// what is the shard count and what is the shard idx
 	var shardCount int = len(c.Shards)
@@ -59,6 +63,8 @@ func main() {
 	if shardIdx < 0 {
 		log.Fatalf("Shard %q not found!", *shard)
 	}
+
+
 
 	log.Printf("Shard count is %d, currently writing to shard: %d", shardCount, shardIdx)
 	db, close, err := db.NewDatabase(*dbLocation)
