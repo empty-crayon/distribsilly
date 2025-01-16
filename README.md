@@ -2,7 +2,7 @@
 
 A Silly implementation of distributed key value database.
 
-Distribsilly is a lightweight and straightforward implementation of a distributed key-value database. The project is intentionally rudimentary, focusing on simplicity and reliability in the realm of distributed systems.
+Distribsilly is a lightweight and straightforward implementation of a distributed key-value database.
 
 ### Why "Distribsilly"?
 
