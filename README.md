@@ -42,14 +42,3 @@ Details for installation and usage will be added as the project progresses.
 
 - **Implement Replication**  
   Add support for data replication across shards to enhance reliability and fault tolerance. (Details and subparts to be added later.)
-
----
-
-## Contributing
-
-Contributions to Distribsilly are welcome! Feel free to submit issues or pull requests as we refine and expand the project.
-
----
-
-Stay tuned for updates as Distribsilly grows from a "silly" project into a useful tool for understanding distributed systems!
-
