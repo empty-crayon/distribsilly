@@ -3,6 +3,8 @@ package config
 import (
 	"fmt"
 	"hash/fnv"
+
+	"github.com/BurntSushi/toml"
 )
 
 // Shard describes the shard which holds the unique keys
@@ -22,6 +24,16 @@ type Shards struct {
 	Count  int
 	CurIdx int
 	Addrs  map[int]string
+}
+
+// Parse File parses the config and returns it 
+func ParseFile (filename string) (Config, error) {
+	var c Config
+	if _, err := toml.DecodeFile(filename, &c); err != nil {
+		return Config{}, err
+	}
+
+	return c, nil 
 }
 
 // Parseshards converts and verifies list of shards specified in the config into a form that can be used for routing
@@ -60,9 +72,10 @@ func ParseShards(shards []Shard, curShardName string) (*Shards, error) {
 	}, nil
 }
 
-func (s *Shards) getShard(key string) int {
+// index returns the shard number for the corresponding key
+func (s *Shards) GetShard(key string) int {
 	hash := fnv.New64()
 	hash.Write([]byte(key))
-	shardId := int(hash.Sum64() % uint64(s.shardCount))
+	shardId := int(hash.Sum64() % uint64(s.Count))
 	return shardId
 }
